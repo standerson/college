@@ -1,0 +1,24 @@
+///Contract that collects funds that will be released when someone is college aged.
+
+contract CollegeFund {
+
+	///college bound address
+	address public recipient;
+
+	///college age time
+	uint public collegeAgeTime = 2007834009;
+
+	function CollegeFund(address _recipient ){
+	recipient = _recipient;
+	}
+
+	function Take() {
+                
+                if (msg.sender != recipient) throw;
+
+                if (block.timestamp < collegeAgeTime) throw;
+
+                if (!recipient.send(this.balance)) throw;
+        }
+	
+}
